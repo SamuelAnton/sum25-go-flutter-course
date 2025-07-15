@@ -32,8 +32,23 @@ jobs:
         working-directory: labs/lab07/frontend
 
       - name: Build web
-        run: flutter build web --release --base-href /sum25-go-flutter-course/ --web-renderer html --pwa-strategy none
-        working-directory: labs/lab07/frontend
+        run: |
+          cd labs/lab07/frontend
+          flutter clean
+          flutter pub get
+          flutter build web \
+            --release \
+            --base-href /sum25-go-flutter-course/ \
+            --web-renderer canvaskit \
+            --dart-define=FLUTTER_WEB_CANVASKIT_URL=/canvaskit/ \
+            --pwa-strategy none
+          ls -R build/web  # Verify files
+      
+      - name: Add critical files
+        run: |
+          cd labs/lab07/frontend/build/web
+          touch .nojekyll
+          echo "/sum25-go-flutter-course/" > CNAME
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
