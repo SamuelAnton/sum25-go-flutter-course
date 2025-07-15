@@ -10,7 +10,6 @@ on:
   workflow_dispatch:
 
 permissions:
-  pull-requests: write
   contents: write
 
 jobs:
@@ -25,7 +24,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: stable
           flutter-version: '3.10.0'
 
       - name: Install dependencies
@@ -33,11 +32,8 @@ jobs:
         working-directory: labs/lab07/frontend
 
       - name: Build web
-        run: flutter build web --release --base-href /sum25-go-flutter-course/
+        run: flutter build web --release --base-href /sum25-go-flutter-course/ --web-renderer html
         working-directory: labs/lab07/frontend
-      
-      - name: List built files
-        run: ls -R labs/lab07/frontend/build/web
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -45,3 +41,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: labs/lab07/frontend/build/web
           keep_files: false
+          enable_jekyll: false
