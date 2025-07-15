@@ -2,7 +2,7 @@ name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
-    branches: [ main, master, lab07-sadykov-damir ]
+    branches: [ '**' ]
     paths:
       - 'labs/lab07/frontend/**'
     
