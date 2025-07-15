@@ -49,6 +49,12 @@ jobs:
           cd labs/lab07/frontend/build/web
           touch .nojekyll
           echo "/sum25-go-flutter-course/" > CNAME
+      
+      - name: Fix index.html
+        run: |
+          cd labs/lab07/frontend/build/web
+          sed -i 's/flutter_bootstrap\.js/flutter.js/g' index.html
+          sed -i 's/<base href="\/">/<base href="\/sum25-go-flutter-course\/">/g' index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
