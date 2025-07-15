@@ -2,11 +2,16 @@ name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
-    branches: [ '**' ]
+    branches: [lab07-*]
     paths:
-      - 'labs/lab07/frontend/**'
+      - 'labs/lab07/**'
+      - '.github/workflows/deploy.yml'
     
   workflow_dispatch:
+
+permissions:
+  pull-requests: write
+  contents: write
 
 jobs:
   build-and-deploy:
