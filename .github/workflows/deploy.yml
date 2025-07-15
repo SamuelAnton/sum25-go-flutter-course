@@ -32,7 +32,11 @@ jobs:
         working-directory: labs/lab07/frontend
 
       - name: Build web
-        run: flutter build web --release --base-href /sum25-go-flutter-course/ --web-renderer html
+        run: flutter build web --release --base-href /sum25-go-flutter-course/ --web-renderer html --pwa-strategy none
+        working-directory: labs/lab07/frontend
+      
+      - name: Verify build output
+        run: ls -la labs/lab07/frontend/build/web
         working-directory: labs/lab07/frontend
 
       - name: Deploy to GitHub Pages
