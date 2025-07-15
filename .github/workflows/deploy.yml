@@ -27,20 +27,13 @@ jobs:
           channel: stable
           flutter-version: '3.10.0'
 
-      - name: Verify web support
-        run: |
-          cd labs/lab07/frontend
-          flutter devices
-          flutter create --platforms web .
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: labs/lab07/frontend
 
-      - name: Build web (debug)
-        run: |
-          cd labs/lab07/frontend
-          echo "Current directory: $(pwd)"
-          flutter pub get
-          flutter build web --release --base-href /sum25-go-flutter-course/ --verbose
-          ls -R build/web
-        shell: bash
+      - name: Build web
+        run: flutter build web --release --base-href /sum25-go-flutter-course/ --web-renderer html --pwa-strategy none
+        working-directory: labs/lab07/frontend
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
